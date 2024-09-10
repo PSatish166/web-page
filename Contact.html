@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Contact Page</title>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="images/images.png" alt="Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="form.html">form</a></li>
+                <li><a href="Student-register">Student-register</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="content">
+        <p>This is the content of the Contact Page.</p>
+        <form class="contactform" action="submit_contact.php" method="POST">
+            <table>
+                <tr>
+                    <td><label for="name">Name:</label></td>
+                    <td><input type="text" id="name" name="name" required></td>
+                </tr>
+                <tr>
+                    <td><label for="email">Email:</label></td>
+                    <td><input type="email" id="email" name="email" required></td>
+                </tr>
+                <tr>
+                    <td><label for="gender">Gender:</label></td>
+                    <td>
+                        <input type="radio" id="male" name="gender" value="male" checked>
+                        <label for="male">Male</label>
+                        <input type="radio" id="female" name="gender" value="female">
+                        <label for="female">Female</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="course">Course:</label></td>
+                    <td>
+                        <select id="course" name="course">
+                            <option value="Computer Science">Computer Science</option>
+                            <option value="Engineering">Engineering</option>
+                            <option value="Business">Business</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="year">Year:</label></td>
+                    <td>
+                        <select id="year" name="year">
+                            <option value="1">1st Year</option>
+                            <option value="2">2nd Year</option>
+                            <option value="3">3rd Year</option>
+                            <option value="4">4th Year</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="interests">Interests:</label></td>
+                    <td>
+                        <input type="checkbox" id="sports" name="interests[]" value="Sports">
+                        <label for="sports">Sports</label>
+                        <input type="checkbox" id="music" name="interests[]" value="Music">
+                        <label for="music">Music</label>
+                        <input type="checkbox" id="reading" name="interests[]" value="Reading">
+                        <label for="reading">Reading</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="message">Message:</label></td>
+                    <td><textarea id="message" name="message" rows="4" cols="50"></textarea></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align:center;"><input type="submit" value="Submit"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <script src="script.js"></script>
+
+</body>
+</html>

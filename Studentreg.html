@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register for Exam</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        input, select {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        input:focus, select:focus {
+            border-color: #66afe9;
+            outline: none;
+            box-shadow: 0 0 5px rgba(102, 175, 233, 0.6);
+        }
+
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            margin-top: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            background-color: #f9f9f9;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .btn-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            color: white;
+        }
+
+        .btn-view {
+            background-color: #2196F3;
+        }
+
+        .btn-download {
+            background-color: #4CAF50;
+        }
+
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 8px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        @media (max-width: 600px) {
+            .modal-content {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="images/images.png" alt="Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="form.html">form</a></li>
+                <li><a href="Student-register">Student-register</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Register for Exam</h1>
+        <form id="registrationForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="course">Course:</label>
+            <select id="course" name="course" required>
+                <option value="Mathematics">Mathematics</option>
+                <option value="Science">Science</option>
+                <option value="English">English</option>
+                <option value="History">History</option>
+            </select>
+
+            <label for="fee">Fee:</label>
+            <input type="number" id="fee" name="fee" required>
+
+            <button type="submit">Submit</button>
+        </form>
+
+        <div class="result">
+            <h2>Registered Students:</h2>
+            <table id="resultTable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Course</th>
+                        <th>Fee</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data will be added here dynamically -->
+                </tbody>
+            </table>
+            <div class="btn-container">
+                <button class="btn btn-download" onclick="downloadExcel()">Download as Excel</button>
+                <button class="btn btn-view" onclick="openModal()">View All Data</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- The Modal -->
+    <div id="viewModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Registered Students Details</h2>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script>
+        let studentData = [];
+        let studentCount = 0;
+
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Get form data
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const course = document.getElementById('course').value;
+            const fee = document.getElementById('fee').value;
+
+            // Increment the student count
+            studentCount++;
+
+            // Store the data in an array
+            studentData.push({
+                "Name": name,
+                "Email": email,
+                "Course": course,
+                "Fee": fee
+            });
+
+            // Add the data to the table
+            const tableBody = document.getElementById('resultTable').querySelector('tbody');
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td>${studentCount}</td>
+                <td>${name}</td>
+                <td>${email}</td>
+                <td>${course}</td>
+                <td>$${fee}</td>
+            `;
+            tableBody.appendChild(newRow);
+
+            // Clear the form fields
+            document.getElementById('registrationForm').reset();
+        });
+
+        function downloadExcel() {
+            // Convert the student data array to a worksheet
+            const ws = XLSX.utils.json_to_sheet(studentData);
+            // Create a new workbook
+            const wb = XLSX.utils.book_new();
+            // Append the worksheet to the workbook
+            XLSX.utils.book_append_sheet(wb, ws, "Students");
+            // Generate an Excel file and trigger download
+            XLSX.writeFile(wb, "registered_students.xlsx");
+        }
+
+        function openModal() {
+            // Get the modal element
+            const modal = document.getElementById('viewModal');
+            // Get the modal content div
+            const modalContent = document.getElementById('modalContent');
+
+            // Clear any previous content
+            modalContent.innerHTML = '';
+
+            // Populate the modal with student data
+            studentData.forEach((student, index) => {
+                const studentDetails = document.createElement('p');
+                studentDetails.innerHTML = `<strong>${index + 1}.</strong> Name: ${student.Name}, Email: ${student.Email}, Course: ${student.Course}, Fee: $${student.Fee}`;
+                modalContent.appendChild(studentDetails);
+            });
+
+            // Show the modal
+            modal.style.display = "block";
+        }
+
+        function closeModal() {
+            // Get the modal element
+            const modal = document.getElementById('viewModal');
+            // Hide the modal
+            modal.style.display = "none";
+        }
+
+        // Close the modal when the user clicks outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('viewModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
